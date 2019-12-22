@@ -28,12 +28,9 @@ This will run the generator, and *shitty* validator after it.
 ```
 Output:
 Generating valid accounts....
-['u', 'o', 't', 'l', 'w', 'm', 'a', 'a', 'c', 's', 's', 's', 't', 'h', 'e', 't', 'j', 'a', 's', 'd', 's', 'p', 't', 'g']
-[1, 1, 4, 1, 1, 1, 3, 3, 1, 5, 5, 5, 4, 1, 1, 4, 1, 3, 5, 1, 5, 1, 4, 1]
-Total combos: 663552
-Unfiltered total combos: 21600000
-[['unveil'], ['offer'], ['trumpet', 'toddler', 'tackle', 'theory'], ['leader'], ['word'], ['maid'], ['again', 'accident', 'aware'], ['again', 'accident', 'aware'], ['coffee'], ['slab', 'stumble', 'series', 'salad', 'short'], ['slab', 'stumble', 'series', 'salad', 'short'], ['slab', 'stumble', 'series', 'salad', 'short'], ['trumpet', 'toddler', 'tackle', 'theory'], ['hockey'], ['eyebrow'], ['trumpet', 'toddler', 'tackle', 'theory'], ['jacket'], ['again', 'accident', 'aware'], ['slab', 'stumble', 'series', 'salad', 'short'], ['design'], ['slab', 'stumble', 'series', 'salad', 'short'], ['pact'], ['trumpet', 'toddler', 'tackle', 'theory'], ['guide']]
-16020 Found, 92% Scanned, 2.0 M per sec (Elapsed: 10 seconds, Remaining: 1.329 milliseconds ago)
+Total combos (with repetitions)   : 21600000
+Total combos (without repetitions): 663552
+16224 Found, 93% Scanned, 2.0 M/s (Elapsed: 10 seconds, Remaining: 0.421 milliseconds)
 Filtered
 Probabilities found (filtered, without matches):  17280
 Writing data...

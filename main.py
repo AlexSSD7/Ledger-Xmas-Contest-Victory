@@ -8,10 +8,13 @@ import time
 import datetime
 import ago
 from si_prefix import si_format
+from stuff import hints, mnemonics
 
 
 def prettify_time(secs):
+    # Converts bare seconds to human-readable format (like 3 hours 28 minutes)
     if secs <= 60:
+        # We don't need to display milliseconds, if we have seconds
         precision = 1
     else:
         precision = 2
@@ -20,29 +23,22 @@ def prettify_time(secs):
     return prettified_time
 
 
+# Reading BIP-39 dictionary
 with open("dictdata/english.txt", "r") as f:
     mnemonics_all = f.read().split("\n")[:-1]
 
-mnemonics = ["hockey", "offer", "pact", "coffee", "leader", "design", "eyebrow", "trumpet", "word", "toddler", "tackle",
-             "jacket", "unveil", "slab", "stumble", "series", "again", "theory", "maid", "salad", "guide",
-             "accident", "aware", "short"]
-
+# Checking if given words are valid
 for word in mnemonics:
     if word not in mnemonics_all:
         print("NOT VALID MNEMONICS")
         exit()
 
-hints = [
-    "u", "o", "t", "l", "w", "m", "a", "a", "c", "s", "s", "s", "t", "h", "e", "t", "j", "a", "s", "d", "s", "p", "t",
-    "g"
-]
-
-# hints = [x[0] for x in mnemonics][:-2] + [""]*2
-print(hints)
+# Check hints
+# print(hints)
 
 possible_mnemonics = mnemonics.copy()
 
-unknown_words_possibillities = []
+# Checking amount of words that seems like to be ok with given hint
 hint_chars = {}
 unknown_hints = 0
 for hint_char in hints:
@@ -53,6 +49,8 @@ for hint_char in hints:
     elif hint_char == "":
         unknown_hints += 1
 
+
+# Checking amount of words starting with N letter
 word_chars = {}
 for word in mnemonics:
     word_char = word[0]
@@ -65,10 +63,10 @@ for word in mnemonics:
 for char, count in word_chars.items():
     hint_char_count = hint_chars[char]
     if count != hint_char_count:
-        pass
-        # raise(Exception("Mnemonics aren't matched with hints"))
+        raise(Exception("Mnemonics aren't matched with hints"))
 
 
+# Get mnemonics available for part with no hint (unused with second hint)
 mnemonics_if_null = mnemonics.copy()
 for word in mnemonics:
     f_letter = word[0]
@@ -80,12 +78,11 @@ for word in mnemonics:
         if hint_chars[f_letter] == word_match_count:
             mnemonics_if_null.remove(word)
 
+# Constructing list with possible values
 all_possible_combinations = []
-
 for char in hints:
     if len(char) == 1:
         combos = []
-
         for word in mnemonics:
             if word[0] == char:
                 combos.append(word)
@@ -93,11 +90,15 @@ for char in hints:
     elif char == "":
         all_possible_combinations.append(mnemonics_if_null)
 
+# Writing it to file (extra checkpoint)
 # with open("payload.out.txt", "w") as f:
 #     f.write(json.dumps(all_possible_combinations))
 
+# Convert list with possible values to list with possible values count
 num_possible_combos = [len(x) for x in all_possible_combinations]
-print(num_possible_combos)
+# print(num_possible_combos)
+
+# Calculating possible filtered (with no repetitions) combination count
 total_possible_combos = []
 for x in num_possible_combos:
     if x == 1:
@@ -109,21 +110,30 @@ for x in num_possible_combos:
     else:
         raise (Exception(x, len(mnemonics_if_null), unknown_hints))
 
+# Producing filtered combo count
 total_possible_combos = numpy.prod(total_possible_combos)
+
+# Producing unfiltered combo count
 unfiltered_possible_combos = numpy.prod(num_possible_combos)
-print("Total combos: {0}".format(total_possible_combos))
-print("Unfiltered total combos: {0}".format(unfiltered_possible_combos))
-print(all_possible_combinations)
 
-all_possible_combinations_int = []
-for word_combo in all_possible_combinations:
-    to_be_added = []
-    for word in word_combo:
-        to_be_added.append(mnemonics_all.index(word) + 1)
-    all_possible_combinations_int.append(to_be_added)
+# Displaying all stuff
+print("Total combos (with repetitions)   : {0}".format(unfiltered_possible_combos))
+print("Total combos (without repetitions): {0}".format(total_possible_combos))
+# print(all_possible_combinations)
 
+# (Deprecated)
+# all_possible_combinations_int = []
+# for word_combo in all_possible_combinations:
+#     to_be_added = []
+#     for word in word_combo:
+#         to_be_added.append(mnemonics_all.index(word) + 1)
+#     all_possible_combinations_int.append(to_be_added)
+
+
+# Cartesian product of possible combos
 possibilities = itertools.product(*all_possible_combinations)
 
+# Getting prepared to be filtered (delete repetitions)
 possibilities_filtered = []
 is_filtering = True
 filter_count = 0
@@ -132,6 +142,7 @@ latest_filter_count = 0
 
 
 def check_filter():
+    # This thread reports progress of filtering
     global latest_filter_count
     time.sleep(10)
     while True:
@@ -141,7 +152,7 @@ def check_filter():
             speed_per_sec = (filter_count - latest_filter_count) / 10
             time_remaining = (unfiltered_possible_combos - filter_count) / speed_per_sec
             percentage = int((filter_count / unfiltered_possible_combos) * 100)
-            print("{0} Found, {1}% Scanned, {2} per sec (Elapsed: {3}, Remaining: {4})".format(
+            print("{0} Found, {1}% Scanned, {2}/s (Elapsed: {3}, Remaining: {4})".format(
                 len(possibilities_filtered), percentage, si_format(speed_per_sec),
                 prettify_time(int(time_elapsed)), prettify_time(int(time_remaining))
             ))
@@ -151,26 +162,34 @@ def check_filter():
             break
 
 
+# Starting thread
 check_thread = Thread(target=check_filter, daemon=True).start()
 
+# Finally, filtering
 for possibility in possibilities:
     if len(possibility) == len(set(possibility)):
         # print(possibility)
         possibilities_filtered.append(possibility)
     filter_count += 1
 
+# Shutdown check_filter() thread
 is_filtering = False
 
 print("Filtered")
 print("Probabilities found (filtered, without matches): ", len(possibilities_filtered))
 print("Writing data...")
-with open("possibilities.out.txt", "w") as f:
-    f.write(json.dumps(possibilities_filtered))
+
+# Writing filtered possible combos (additional checkpoint)
+# with open("possibilities.out.txt", "w") as f:
+#     f.write(json.dumps(possibilities_filtered))
 
 print("Validating harvested phrases...\n")
 
+# Getting prepared to be filtered by bip39 function
 valid_mnemonics = []
+
 for mnemonic_phrase in possibilities_filtered:
+    # BIP-39 Filtering
     try:
         bip39.entropy_from_mnemonic(" ".join(mnemonic_phrase), "en")
         valid_mnemonics.append(mnemonic_phrase)
@@ -178,7 +197,9 @@ for mnemonic_phrase in possibilities_filtered:
     except ValueError:
         pass
 
+# Write BIP-39 valid mnemonics
 with open("valid_possibilities.out.txt", "w") as f:
     f.write(json.dumps(valid_mnemonics))
 
+# Done
 print("Found valid {0} valid mnemonics".format(len(valid_mnemonics)))

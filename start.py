@@ -12,7 +12,8 @@ print("Validating...")
 subprocess.call([py_path, os.path.join(w_path, "checker.py")])
 
 print("Cleaning up...")
-os.remove(os.path.join(w_path, "possibilities.out.txt"))
+
+# os.remove(os.path.join(w_path, "possibilities.out.txt")) # (Deprecated)
 os.remove(os.path.join(w_path, "valid_possibilities.out.txt"))
 
 print("Done.")
