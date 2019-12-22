@@ -1,11 +1,9 @@
 # Ledger Xmas Contest
 Hey there, i'm so exited about my victory on this contest. Proud to share my code. I made it as one-time script, so please, don't judge strictly.
 
-### Hint
-![hint](https://raw.githubusercontent.com/AlexSSD7/Ledger-Xmas-Contest-Victory/master/resources/seed.jpg)
-
-
 ### Cracked mnemonic phrase
+![](../assets/seed.jpg)
+
 ```
 unveil offer trumpet leader word maid again accident coffee series slab salad theory hockey eyebrow toddler jacket aware short design stumble pact tackle guide
 ```
