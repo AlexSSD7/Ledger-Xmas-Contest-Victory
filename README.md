@@ -55,3 +55,5 @@ Star this repo, if you found it helpful.
 That's all!
 
 > python3 <3
+
+Twitter: [@Sadovskyi_Alex](https://twitter.com/Sadovskyi_Alex)
