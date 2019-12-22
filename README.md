@@ -50,6 +50,8 @@ Cleaning up...
 Done.
 ```
 
+Star this repo, if you found it helpful.
+
 That's all!
 
 > python3 <3
