@@ -1,5 +1,5 @@
 # Ledger Xmas Contest
-Hey there, i'm so exited about my victory on this contest. Proud to share my code. I made it as one-time script, so please, don't judge strictly.
+Hey there, i'm so exited about my victory on this contest. Proud to share my code. I made this as one-time script, so please, don't judge strictly.
 
 ### Cracked mnemonic phrase
 ![](assets/seed.png)
