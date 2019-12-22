@@ -2,7 +2,7 @@
 Hey there, i'm so exited about my victory on this contest. Proud to share my code. I made it as one-time script, so please, don't judge strictly.
 
 ### Cracked mnemonic phrase
-![](assets/seed.jpg)
+![](assets/seed.png)
 
 ```
 unveil offer trumpet leader word maid again accident coffee series slab salad theory hockey eyebrow toddler jacket aware short design stumble pact tackle guide
