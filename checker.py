@@ -2,11 +2,15 @@ from selenium import webdriver
 import json
 import time
 
+
+# P.S. This is the most amusing checker you have ever seen (maybe)
+
 driver = webdriver.Chrome()
 
 # BIP-39 Password
 password = None
-# password = "Mary2701985"
+# I thought mnemonic phrase was with pasword
+# password = "Mary2701985" # Only one password shown in video
 
 with open("valid_possibilities.out.txt", "r") as f:
     accounts_to_check = json.loads(f.read())
