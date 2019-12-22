@@ -6,16 +6,16 @@ Hey there, i'm so exited about my victory on this contest. Proud to share my cod
 unveil offer trumpet leader word maid again accident coffee series slab salad theory hockey eyebrow toddler jacket aware short design stumble pact tackle guide
 ```
 
-You can view this account on [exporer](https://www.blockchain.com/btc/address/3JeVd5ALNDvn7BbkqLYfV4qeQ16guPwJD2)
+You can view this account on [exporer](https://www.blockchain.com/btc/address/3JeVd5ALNDvn7BbkqLYfV4qeQ16guPwJD2).
 
 ## How to reproduce that?
-That's very simple, let's begin our journey by installing **python** dependencies
+That's very simple, let's begin our journey by installing **python** dependencies.
 ```sh
 $ pip3 install -r requirements.txt
 ```
 Then, install **Chrome Web Driver for Selenium** [here](https://pypi.org/project/selenium/).
 
-Good, we have python deps installed successfully, let's start automated **start.py** script
+Good, we have python deps installed successfully, let's start automated **start.py** script.
 ```sh
 $ python3 start.py
 ```
