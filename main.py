@@ -94,21 +94,15 @@ for char in hints:
 # with open("payload.out.txt", "w") as f:
 #     f.write(json.dumps(all_possible_combinations))
 
-# Convert list with possible values to list with possible values count
 num_possible_combos = [len(x) for x in all_possible_combinations]
-# print(num_possible_combos)
 
+hint_characters_order = [x[0][0] for x in all_possible_combinations]
+available_char_count = {x[0][0]: len(x) for x in all_possible_combinations}
 # Calculating possible filtered (with no repetitions) combination count
 total_possible_combos = []
-for x in num_possible_combos:
-    if x == 1:
-        total_possible_combos.append(x)
-    elif 1 < x < len(mnemonics_if_null) or (unknown_hints == 0 and x > 1):
-        total_possible_combos.append(x - 1)
-    elif x == len(mnemonics_if_null):
-        total_possible_combos.append(x - (unknown_hints - 1))
-    else:
-        raise (Exception(x, len(mnemonics_if_null), unknown_hints))
+for char in hint_characters_order:
+    total_possible_combos.append(available_char_count[char])
+    available_char_count[char] -= 1
 
 # Producing filtered combo count
 total_possible_combos = numpy.prod(total_possible_combos)
@@ -119,6 +113,7 @@ unfiltered_possible_combos = numpy.prod(num_possible_combos)
 # Displaying all stuff
 print("Total combos (with repetitions)   : {0}".format(unfiltered_possible_combos))
 print("Total combos (without repetitions): {0}".format(total_possible_combos))
+
 # print(all_possible_combinations)
 
 # (Deprecated)
@@ -176,7 +171,7 @@ for possibility in possibilities:
 is_filtering = False
 
 print("Filtered")
-print("Probabilities found (filtered, without matches): ", len(possibilities_filtered))
+print("Probabilities found (filtered, without repetitions): ", len(possibilities_filtered))
 print("Writing data...")
 
 # Writing filtered possible combos (additional checkpoint)
