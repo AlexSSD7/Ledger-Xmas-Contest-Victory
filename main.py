@@ -96,11 +96,10 @@ for char in hints:
 
 num_possible_combos = [len(x) for x in all_possible_combinations]
 
-hint_characters_order = [x[0][0] for x in all_possible_combinations]
 available_char_count = {x[0][0]: len(x) for x in all_possible_combinations}
 # Calculating possible filtered (with no repetitions) combination count
 total_possible_combos = []
-for char in hint_characters_order:
+for char in hints:
     total_possible_combos.append(available_char_count[char])
     available_char_count[char] -= 1
 
