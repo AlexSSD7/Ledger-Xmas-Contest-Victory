@@ -197,4 +197,4 @@ with open("valid_possibilities.out.txt", "w") as f:
     f.write(json.dumps(valid_mnemonics))
 
 # Done
-print("Found valid {0} valid mnemonics".format(len(valid_mnemonics)))
+print("Found {0} valid mnemonics".format(len(valid_mnemonics)))
