@@ -1,4 +1,5 @@
 # Ledger Xmas Contest
+[![Build Status](https://travis-ci.org/AlexSSD7/Ledger-Xmas-Contest-Victory.svg?branch=master)](https://travis-ci.org/AlexSSD7/Ledger-Xmas-Contest-Victory)
 
 Hey there, i'm so exited about my victory on this contest. Proud to share my code. I made this as one-time script, so please, don't judge strictly.
 
