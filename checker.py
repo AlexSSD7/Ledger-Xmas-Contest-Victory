@@ -35,5 +35,5 @@ print(f"{len(addresses)} addresses derived.")
 for address in addresses:
     print(f"Checking address {address}")
     if blockcypher.get_total_num_transactions(address) > 0:
-        print(f'The correct address is {address}\nThe correct mnemonic is: \n{addresses[addr]}')
+        print(f'Cracked successfully: {address}\n{addresses[addr]}')
         quit()
