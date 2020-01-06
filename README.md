@@ -2,7 +2,7 @@
 
 Hey there, i'm so exited about my victory on this contest. Proud to share my code. I made this as one-time script, so please, don't judge strictly.
 
-### Warning
+### Note
 Master branch contains fixes and improvements, if you want to go with original version, please delegate to [original branch](https://github.com/AlexSSD7/Ledger-Xmas-Contest-Victory/tree/original)
 
 ### Cracked mnemonic phrase
