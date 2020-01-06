@@ -62,12 +62,12 @@ for index, mnemonic_phrase in enumerate(accounts_to_check):
 
             print("({0}/{1}) Checking account ".format(index + 1, total_accounts) + first_account, end="... ")
 
-            # Making request to blockchain.com
-            driver.get("https://www.blockchain.com/btc/address/" + first_account)
+            # Making request to blockstream.info
+            driver.get("https://blockstream.info/address/" + first_account)
 
             # Getting transaction count
             txn_count = driver.find_element_by_xpath(
-                '//*[@id="__next"]/div[4]/div/div[3]/div[1]/div[1]/div[2]/div/div[3]/div[2]/span'
+                '//*[@id="explorer"]/div/div/div/div[2]/div[1]/div[1]/div[2]'
             ).get_attribute("innerHTML")
             print("{0} Txns".format(txn_count))
 
@@ -79,6 +79,7 @@ for index, mnemonic_phrase in enumerate(accounts_to_check):
                 driver.close()
                 exit()
         except Exception as e:
+            raise(e)
             # If we've cracked it
             if e == KeyboardInterrupt:
                 exit()
