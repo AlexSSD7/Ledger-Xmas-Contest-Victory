@@ -20,8 +20,6 @@ That's very simple, let's begin our journey by installing **python** dependencie
 ```sh
 $ pip3 install -r requirements.txt
 ```
-Then, install **Chrome Web Driver for Selenium** [here](https://pypi.org/project/selenium/).
-
 Good, we have python deps installed successfully, let's start automated **start.py** script.
 ```sh
 $ python3 start.py
